@@ -24,6 +24,7 @@ import {
     fetchPromotions,
     fetchPartners,
 } from "../redux/ActionCreators";
+import Reservation from "./ReservationComponent";
 
 const mapDispatchToProps = {
     fetchCampsites,
@@ -87,7 +88,30 @@ const HomeNavigator = createStackNavigator(
         }),
     }
 );
-
+const ReservationNavigator = createStackNavigator(
+    {
+        Reservation: { screen: Reservation },
+    },
+    {
+        defaultNavigationOptions: ({ navigation }) => ({
+            headerStyle: {
+                backgroundColor: "#5637DD",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+                color: "#fff",
+            },
+            headerLeft: (
+                <Icon
+                    name="tree"
+                    type="font-awesome"
+                    iconStyle={styles.stackIcon}
+                    onPress={() => navigation.toggleDrawer()}
+                />
+            ),
+        }),
+    }
+);
 const AboutNavigator = createStackNavigator(
     {
         About: { screen: About },
@@ -181,6 +205,20 @@ const MainNavigator = createDrawerNavigator(
                 drawerIcon: ({ tintColor }) => (
                     <Icon
                         name="list"
+                        type="font-awesome"
+                        size={24}
+                        color={tintColor}
+                    />
+                ),
+            },
+        },
+        Reservation: {
+            screen: ReservationNavigator,
+            navigationOptions: {
+                drawerLabel: "Reserve Campsite",
+                drawerIcon: ({ tintColor }) => (
+                    <Icon
+                        name="tree"
                         type="font-awesome"
                         size={24}
                         color={tintColor}
