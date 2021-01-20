@@ -1,12 +1,21 @@
 import React, { Component } from "react";
 import { Text, ScrollView } from "react-native";
 import * as Animatable from "react-native-animatable";
-import { Card } from "react-native-elements";
+import { Card, Button, Icon } from "react-native-elements";
+import * as MailComposer from "expo-mail-composer";
 
 class Contact extends Component {
     static navigationOptions = {
         title: "Contact Us",
     };
+
+    sendMail() {
+        MailComposer.composeAsync({
+            recipients: ["campsites@nucamp.co"],
+            subject: "Inquiry",
+            body: "To whom it may concern:",
+        });
+    }
 
     render() {
         return (
@@ -28,6 +37,19 @@ class Contact extends Component {
                             Email: campsites@nucamp.co
                         </Text>
                     </Card>
+                    <Button
+                        title="Send Email"
+                        buttonStyle={{ backgroundColor: "#5637DD", margin: 40 }}
+                        icon={
+                            <Icon
+                                name="envelope-o"
+                                type="font-awesome"
+                                color="#fff"
+                                iconStyle={{ marginRight: 10 }}
+                            />
+                        }
+                        onPress={() => this.sendMail()}
+                    />
                 </Animatable.View>
             </ScrollView>
         );
